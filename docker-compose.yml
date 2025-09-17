@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+
+  webapi:
+    build: .
+    ports:
+      - "5000:80"
+      - "5001:443"
+    environment:
+      - ConnectionStrings__DefaultConnection=Data Source=127.0.0.1,1433;Initial Catalog=API_TESTE;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Your_password123;Trust Server Certificate=True;;
+    depends_on:
+      - sqlserver
+
+volumes:
+  sqldata:
