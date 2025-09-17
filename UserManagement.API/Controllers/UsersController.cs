@@ -84,7 +84,7 @@ namespace UserManagement.API.Controllers
 
                 foreach (var user in users)
                 {
-                    usrListResponse.Users.Add(new UserManagement.API.Models.UserResponse(user.Id, user.Name, user.Name, user.CreatedAt));
+                    usrListResponse.Users.Add(new UserManagement.API.Models.UserResponse(user.Id, user.Name, user.Email, user.CreatedAt));
                 }
                 return Ok(ApiResponse<ListUserResponse>.Ok(usrListResponse, "Lista de usuários consultada com sucesso"));
 
